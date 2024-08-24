@@ -1,0 +1,69 @@
+﻿@using BookingSystem.Dto;
+@model RegisterDto;
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<head>
+    
+</head>
+<body>
+    <div class="background"></div>
+    <div class="sign-up-container">
+
+        <form class="register-form" method="POST">
+            <div>Let's go!</div>
+            <div class="field">
+                <label>Username</label>
+                <span>
+                    <input asp-for="UserName" type="text" placeholder="Ex. Jusbas0713" />
+                </span>
+                <span asp-validation-for="UserName" class="error"></span>
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <span>
+                    <input asp-for="Email" type="text" placeholder="Ex.test@gmail.com" />
+                </span>
+                <span asp-validation-for="Email" class="error"></span>
+            </div>
+            <div class="field">
+                <label>First Name</label>
+                <span>
+                    <input asp-for="FirstName" type="text" placeholder="Enter your first name" />
+                </span>
+                <span asp-validation-for="FirstName" class="error"></span>
+            </div>     
+            <div class="field">
+                <label>Family Name</label>
+                <span>
+                    <input asp-for="LastName" type="text" placeholder="Enter your family name" />
+                </span>
+                <span asp-validation-for="LastName" class="error"></span>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <span>
+                    <input asp-for="Password" type="password" placeholder="Minimum 8 Characters" />
+                </span>
+                <span asp-validation-for="Password" class="error"></span>
+            </div>
+            <div class="field">
+                <label>Confirm Password</label>
+                <span>
+                    <input asp-for="ConfirmPassword" type="password" placeholder="Minimum 8 Characters" />
+                </span>
+                <span asp-validation-for="ConfirmPassword" class="error"></span>
+            </div>
+
+            <div class="button-groups">
+                <button class="reg-btn">Register</button>
+            </div>
+            <div class="sign-in-now">
+                <span>Already have an accont?</span>
+                <a href="/Login">Signin now</a>
+            </div>
+        </form>
+    </div>
+</body>
