@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations;
 // Description: DTO for user registration.
 namespace BookingSystem.Dto
 {
-    public class RegisterDto
+    public class CreateUserDto
     {
-        
+
         [Required(ErrorMessage = MessageConstant.USERNAME_BLANK)]
         public string UserName { get; set; } = string.Empty;
 
@@ -21,6 +21,9 @@ namespace BookingSystem.Dto
 
         [Required(ErrorMessage = MessageConstant.LAST_NAME_BLANK)]
         public string LastName { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = MessageConstant.ROLE_BLANK)]
+        public string Role { get; set; } = string.Empty;
 
         [Required(ErrorMessage = MessageConstant.PASSWORD_BLANK)]
         public string Password { get; set; } = string.Empty;

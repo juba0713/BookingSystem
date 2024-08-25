@@ -15,10 +15,12 @@ namespace BookingSystem.Controllers
     { 
 
         private readonly UserManager<UserModel> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public RegisterController(UserManager<UserModel> userManager)
+        public RegisterController(UserManager<UserModel> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
+            this.roleManager = roleManager; 
         }
 
     
@@ -31,6 +33,9 @@ namespace BookingSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
+
+            var role = CommonConstant.ROLE_SUPER;
+
             if (!ModelState.IsValid)
             {
                 return PartialView(CommonConstant.HTML_REGISTER_PATH);
@@ -48,9 +53,31 @@ namespace BookingSystem.Controllers
 
             if(!result.Succeeded)
             {
+                Console.WriteLine("User Insertion Failed");              
                 return PartialView(CommonConstant.HTML_REGISTER_PATH);
             }
 
+            /*
+             * This is to check if the role "USER" has exist in the AspNetRoles
+             */
+            if (!await roleManager.RoleExistsAsync(CommonConstant.ROLE_USER))
+            {
+                var userRoleeCreated = await roleManager.CreateAsync(new IdentityRole(CommonConstant.ROLE_USER));
+                var superRoleCreated = await roleManager.CreateAsync(new IdentityRole(CommonConstant.ROLE_SUPER));
+                if (!userRoleeCreated.Succeeded || !superRoleCreated.Succeeded)
+                {
+                    throw new Exception($"Failed to create role: USER or SUPER");
+                }
+                role = CommonConstant.ROLE_SUPER;
+            }
+
+            var roleResult = await userManager.AddToRoleAsync(newUser, role);
+
+            if (!roleResult.Succeeded)
+            {
+                Console.WriteLine("Role Async Failed");
+                return PartialView(CommonConstant.HTML_REGISTER_PATH);
+            }
 
             return RedirectToAction("Login", "Login");
         }

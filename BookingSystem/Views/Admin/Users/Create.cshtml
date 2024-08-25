@@ -1,14 +1,10 @@
 ﻿@using BookingSystem.Dto;
-@model RegisterDto;
-
-@{
-    ViewData["Title"] = "Register";
-}
-
+@model CreateUserDto;
 <head>
-    
+
 </head>
 <body>
+    <p>Create User</p>
     <div class="sign-up-container">
 
         <form class="register-form" method="POST">
@@ -33,13 +29,21 @@
                     <input asp-for="FirstName" type="text" placeholder="Enter your first name" />
                 </span>
                 <span asp-validation-for="FirstName" class="error"></span>
-            </div>     
+            </div>
             <div class="field">
                 <label>Family Name</label>
                 <span>
                     <input asp-for="LastName" type="text" placeholder="Enter your family name" />
                 </span>
                 <span asp-validation-for="LastName" class="error"></span>
+            </div>
+            <div class="field">
+                <label>Role</label>
+                <select asp-for="Role">
+                    <option value="ADMIN">Admin</option>
+                    <option value="USER">User</option>
+                </select>
+                <span asp-validation-for="Role" class="error"></span>
             </div>
             <div class="field">
                 <label>Password</label>
@@ -59,10 +63,7 @@
             <div class="button-groups">
                 <button class="reg-btn">Register</button>
             </div>
-            <div class="sign-in-now">
-                <span>Already have an accont?</span>
-                <a href="/Login">Signin now</a>
-            </div>
         </form>
     </div>
+    <a asp-controller="System" asp-action="Users">Back</a>
 </body>

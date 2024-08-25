@@ -45,6 +45,24 @@ namespace BookingSystem.Controllers
                 return PartialView(CommonConstant.HTML_LOGIN_PATH);
             }
 
+            var user = await userManager.FindByNameAsync(loginDto.UserName);
+
+            if (user == null)
+            {
+                return PartialView(CommonConstant.HTML_LOGIN_PATH);
+            }
+
+            var roles = await userManager.GetRolesAsync(user);
+
+            if (roles.Contains(CommonConstant.ROLE_SUPER))
+            {
+                return RedirectToAction("Dashboard", "System"); 
+            }
+            if (roles.Contains(CommonConstant.ROLE_ADMIN))
+            {
+                return RedirectToAction("Dashboard", "Admin");
+            }
+            
             return RedirectToRoute("Dashboard");
         }
     }

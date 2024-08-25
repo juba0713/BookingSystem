@@ -23,13 +23,7 @@ namespace BookingSystem.Controllers
             return PartialView(CommonConstant.HTML_DASHBOARD_PATH);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Logout()
-        {
-            await signInManager.SignOutAsync();
-
-            return RedirectToAction("Login", "Login");
-        }
+       
 
     }
 }

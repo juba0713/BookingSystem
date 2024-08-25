@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20240824151453_InitialTable")]
-    partial class InitialTable
+    [Migration("20240825033429_CreatedUserTable")]
+    partial class CreatedUserTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
